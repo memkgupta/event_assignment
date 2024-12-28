@@ -90,10 +90,12 @@ This README provides a clear and concise guide for contributors, outlining the t
 
 **2. Perform the tasks as mentioned and test your project.**
 
-**3. Before creating PRs:**
+**3. Before creating PRs or Branches:**
 * **File:** `/name.md`
 - Put your name inside this file. The certificate will be generated based on the name mentioned there.
 
-**4. Create a new branch and put up your pull request.**
+**4. Create a new branch with your name with all the changes.**
+
+**5. And you're done!**
 
 

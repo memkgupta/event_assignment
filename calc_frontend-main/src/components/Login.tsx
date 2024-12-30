@@ -14,8 +14,10 @@ const LoginForm = () => {
     const navigate = useNavigate();
 const login = async(email:string,password:string)=>{
 try {
-    //TODO: Make a POST request to the backend URL: ${BACKEND_URL}/user/login.
-    //Store the content of request in a 'res' constant which is used further in this code
+    const res = await axios.post(`${BACKEND_URL}/user/login`, {
+        email,
+        password,
+    });
     setUser({name:res.data.name,email:res.data.email,id:res.data.id})
     Cookies.set('token',res.data.token);
 } catch (error) {

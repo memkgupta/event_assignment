@@ -142,11 +142,33 @@ const cookie = Cookies.get('token');
 
     const runRoute = async () => {
         const canvas = canvasRef.current;
-
         if (canvas) {
-            //TODO: Use axios to POST to ${BACKEND_URL}/ai/calculate with image data, dictOfVars, and Authorization: Bearer ${cookie}.
-            //Get the reponse in a response variable which is used further in the code.
+            let ctx = canvas.getContext('2d'); // Declare ctx only once
+        if (!ctx) {
+            console.error('Canvas context is not available');
+            return;
+        }
 
+        try {
+            // Get the canvas data as a Base64-encoded string
+            const imageDataURL = canvas.toDataURL('image/png');
+
+            // Extract only the Base64 part of the data URL
+            const base64ImageData = imageDataURL.split(',')[1];
+
+            // Make the POST request
+            const response = await axios.post(
+                `${BACKEND_URL}/ai/calculate`,
+                {
+                    image: base64ImageData,
+                    variables: dictOfVars,
+                },
+                {
+                    headers: {
+                        Authorization: `Bearer ${cookie}`,
+                    },
+                }
+            );
             const resp = await response.data;
             resp.data.forEach((data: Response) => {
                 if (data.assign === true) {
